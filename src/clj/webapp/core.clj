@@ -5,18 +5,26 @@
             [compojure.route :as route]
             [compojure.response :refer [render]]
             [clojure.java.io :as io]
-            [webapp.styles :as cs]
+            [webapp.styles]
+            [webapp.views :as wv]
             ))
 
 ;; This is a handler that returns the
 ;; contents of `resources/index.html`
-(defn home
+(defn static-home
   [req]
   (render (io/resource "index.html") req))
+
+;;hiccup
+;;return non-static page
+(defn home
+  [req]
+  (render (wv/index) req))
 
 ;; Defines a handler that acts as router
 (defroutes app
   (GET "/" [] home)
+  (GET "/static/home" [] static-home)
   (route/resources "/static")
   (route/not-found "<h1>Page not found</h1>"))
 
