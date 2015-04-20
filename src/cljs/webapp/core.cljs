@@ -28,6 +28,7 @@
 
 (logger "123")
 
+
 (.click (dom/getElement "button"))
 
 
@@ -38,3 +39,5 @@
     ((fn[x] (logger sum) x) sum)
     ;;sum
     (recur (+ cnt sum) (dec cnt))))
+
+;;(.reload (.-location js/window))

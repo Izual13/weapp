@@ -13,7 +13,9 @@
                  [ring/ring-defaults "0.1.2" :exclusions [javax.servlet/servlet-api]]
 
                  [cc.qbits/jet "0.5.4"]
-                 [garden "1.2.5"]]
+                 [garden "1.2.5"]
+
+                 [com.novemberain/monger "2.0.0"]]
   ;; beign cljs
   :plugins [[lein-cljsbuild "1.0.4"]]
   :cljsbuild {:builds
@@ -29,5 +31,4 @@
   ;; end cljs
   :source-paths ["src/clj"]
   :hooks [leiningen.cljsbuild]
-  :main webapp.core
-  )
+  :main webapp.core)
