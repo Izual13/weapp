@@ -24,10 +24,11 @@
       (js "/static/js/app.js")]]))
 
 
-(defn index [] (layout "webapp" [:h1 "Hello, World!"]
-                 [:section [:span "Cliks: "]
-                           [:span {:id "clicksnumber"}]]
-                 [:button {:id "button"} "Click me!"]))
+(defn index [] (layout "Welcome!" [:h1 "Hello, World!"]
+                       [:div.panel.panel-default
+                        [:div.panel-heading[:span "Cliks: "][:span {:id "clicksnumber"}]]
+                        [:div.panel-body [:button.btn.btn-sm.btn-default {:id "button"} "Click me!"]]]
+                       ))
 
 
 (defn error [] (layout "Warning!"
