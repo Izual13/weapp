@@ -1,6 +1,14 @@
 (ns webapp.core
   (:require [goog.events :as events]
-            [goog.dom :as dom]))
+            [goog.dom :as dom]
+            [ajax.core :refer [abort ajax-request
+                      url-request-format
+                      edn-response-format
+                      edn-request-format
+                      raw-response-format
+                      transit-request-format
+                      transit-response-format
+                      GET POST]]))
 
 
 
@@ -41,3 +49,22 @@
     (recur (+ cnt sum) (dec cnt))))
 
 ;;(.reload (.-location js/window))
+
+(def message (GET "/messages"))
+(logger (GET "/messages"))
+
+;; (set! (.-innerHTML (dom/getElement "clicksnumber"))
+;;       ((map (GET "/messages"))))
+(GET "/messages" {:handler logger :error-handler (fn [x](.log js/console "error")(.log js/console x))})
+
+
+
+(GET "/messages/553b50d97356c9f7ddbfd656" {:handler logger :error-handler logger})
+
+
+
+(defn render-message [{:keys [message user]}]
+ [:li [:p {:id user} message " - " user]])
+
+;;(->> (GET "/messages")
+  ;;   (map render-message))

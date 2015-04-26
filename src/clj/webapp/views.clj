@@ -20,14 +20,14 @@
       (style "/static/css/monokai_sublime.css")
       (style "/static/css/styles.css")]
      [:body
-      [:div.container body]
-      (js "/static/js/app.js")]]))
+      [:div.container body]]]))
 
 
 (defn index [] (layout "Welcome!" [:h1 "Hello, World!"]
                        [:div.panel.panel-default
                         [:div.panel-heading[:span "Cliks: "][:span {:id "clicksnumber"}]]
                         [:div.panel-body [:button.btn.btn-sm.btn-default {:id "button"} "Click me!"]]]
+                       (js "/static/js/app.js")
                        ))
 
 

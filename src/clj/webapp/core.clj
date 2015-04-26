@@ -1,14 +1,13 @@
 (ns webapp.core
-  (:require [qbits.jet.server :refer [run-jetty]]
-            [ring.middleware.defaults :refer [wrap-defaults site-defaults]]
-            [compojure.core :refer :all]
+  (:require [compojure.core :refer :all]
             [compojure.route :as route]
             [compojure.response :refer [render]]
             [clojure.java.io :as io]
             [webapp.styles]
-            [webapp.mongo]
+            [webapp.mongo :as mg]
             [webapp.views :as wv]
-            ))
+            [clojure.data.json :as json]
+            [org.httpkit.server :as httpkit]))
 
 ;; This is a handler that returns the
 ;; contents of `resources/index.html`
@@ -22,27 +21,44 @@
 
 (defn error [req] (render (wv/error) req))
 
+(defn json-wrapper [body]
+  {:status 200
+   :headers {"Content-Type" "application/json; charset=utf-8"}
+   :body (json/write-str body :escape-unicode false)})
+
+
+(defn log [x] (.println (System/out) x))
+
 ;; Defines a handler that acts as router
 (defroutes app
   (GET "/" [] home)
+  (GET "/test" [] home)
   (GET "/static/home" [] static-home)
   (route/resources "/static")
+  (context "/messages" [] (defroutes messages-routes
+        (GET  "/" [] (json-wrapper (mg/get-all-messages)))
+        (POST "/" {body :body} (mg/create-new-message body))
+        (context "/:id" [id] (defroutes message-routes
+          (GET    "/" [] (json-wrapper (mg/get-message id)))
+          (PUT    "/" {body :body} (mg/update-message id body))
+          (DELETE "/" [] (mg/delete-message id))))))
   (route/not-found error))
 
+;;{:status 200 :headers {"Content-Type" "application/json"} :body "{}"}
 ;; Application entry point
 ;;(defn -main
 ;;  [& args]
 ;;  (let [app (wrap-defaults app site-defaults)]
 ;;    (run-jetty {:ring-handler app :port 5050})))
 
-(unsigned-bit-shift-right -1 30)
+;;(unsigned-bit-shift-right -1 30)
+ ;;(log (class (mg/get-all-messages)))
 
+;;  (defn -main [& args]
+;;   (let [port (Integer/parseInt (get (System/getenv) "OPENSHIFT_CLOJURE_HTTP_PORT" "8080"))
+;;         ip (get (System/getenv) "OPENSHIFT_CLOJURE_HTTP_IP" "0.0.0.0")]
+;;     (run-server app {:ip ip :port port})))
 
-;;;;test
+(defn start [] (httpkit/run-server  #'app {:port 5050}))
 
-(defonce server (run-jetty {:ring-handler app :port 8080 :join? false}))
-
-;;(.stop server)
-
-;;(.start server)
-
+(start)

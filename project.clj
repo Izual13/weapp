@@ -7,15 +7,24 @@
 
                  ;; Backend dependencies
                  [compojure "1.3.1"]
+                 [http-kit "2.1.19"]
 
-                 [ring/ring-core "1.3.2" :exclusions [javax.servlet/servlet-api]]
-                 [ring/ring-servlet "1.3.2" :exclusions [javax.servlet/servlet-api]]
-                 [ring/ring-defaults "0.1.2" :exclusions [javax.servlet/servlet-api]]
+                 ;;[ring/ring-core "1.3.2" :exclusions [javax.servlet/servlet-api]]
+                 ;;[ring/ring-servlet "1.3.2" :exclusions [javax.servlet/servlet-api]]
+                 ;;[ring/ring-defaults "0.1.2" :exclusions [javax.servlet/servlet-api]]
+                 ;;[ring/ring-json "0.3.1"]
 
-                 [cc.qbits/jet "0.5.4"]
+                 ;;[cc.qbits/jet "0.5.4"]
                  [garden "1.2.5"]
+                 [cljs-ajax "0.3.11"]
 
-                 [com.novemberain/monger "2.0.0"]]
+                 [org.clojure/data.json "0.2.6"]
+                 ;;mongo json
+                 ;;[cheshire "5.3.1"]
+
+                 [com.novemberain/monger "2.1.0"]]
+
+
   ;; beign cljs
   :plugins [[lein-cljsbuild "1.0.4"]]
   :cljsbuild {:builds
