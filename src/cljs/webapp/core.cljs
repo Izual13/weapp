@@ -16,7 +16,7 @@
 (defn main
   []
   (let [counter (atom 0)
-        button  (dom/getElement "button")
+        button  (dom/getElement "onClick")
         display (dom/getElement "clicksnumber")]
 
     ;; Set initial value
@@ -37,7 +37,7 @@
 (logger "123")
 
 
-(.click (dom/getElement "button"))
+(.click (dom/getElement "onClick"))
 
 
 ((fn add [a b] (+ a b)) 1 2)
@@ -53,18 +53,33 @@
 (def message (GET "/messages"))
 (logger (GET "/messages"))
 
-;; (set! (.-innerHTML (dom/getElement "clicksnumber"))
-;;       ((map (GET "/messages"))))
+;; (set! (.-innerHTML (dom/getElement "clicksnumber"))((map (GET "/messages"))))
 (GET "/messages" {:handler logger :error-handler (fn [x](.log js/console "error")(.log js/console x))})
 
 
 
-(GET "/messages/553b50d97356c9f7ddbfd656" {:handler logger :error-handler logger})
+(GET "/messages/554536e673566e17b0917cab"
+     {:handler show-message
+      :error-handler logger
+      :response-format :json
+      :keywords? true})
 
+
+
+
+
+
+(defn show-message [{:keys [_id body x]}]
+  (set! (.-innerHTML (dom/getElement "clicksnumber"))
+        ((map (GET "/messages")))))
+
+(defn show-message [x] (logger x))
 
 
 (defn render-message [{:keys [message user]}]
  [:li [:p {:id user} message " - " user]])
+
+
 
 ;;(->> (GET "/messages")
   ;;   (map render-message))

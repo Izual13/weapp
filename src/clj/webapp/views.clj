@@ -26,7 +26,12 @@
 (defn index [] (layout "Welcome!" [:h1 "Hello, World!"]
                        [:div.panel.panel-default
                         [:div.panel-heading[:span "Cliks: "][:span {:id "clicksnumber"}]]
-                        [:div.panel-body [:button.btn.btn-sm.btn-default {:id "button"} "Click me!"]]]
+                        [:div.panel-body
+                         [:button.btn.btn-sm.btn-default {:id "onClick"} "Click me!"]"&nbsp;"
+                         [:button.btn.btn-sm.btn-default {:id "showAll"} "Show all..."]"&nbsp;"
+                         [:button.btn.btn-sm.btn-default {:id "clear"} "Clear..."]]]
+                       [:div.panel.panel-default {:id "messages"}
+                        [:div.panel-heading "Messages"]]
                        (js "/static/js/app.js")
                        ))
 

@@ -11,18 +11,18 @@
 (def db (mg/get-db (mg/connect) "clojure"))
 
 (def message {:header "John" :body "Тестовое сообщение!" :date (utils/dateTime-now)})
-(.get (mc/insert-and-return db "messages" message) :_id)
+;;(.get (mc/insert-and-return db "messages" message) :_id)
 
-(mc/find-map-by-id db "messages" (ObjectId. "5532b09f73562985dfd0e5eb"))
+;;(mc/find-map-by-id db "messages" (ObjectId. "5532b09f73562985dfd0e5eb"))
 
 
-(let [conn (mg/connect)
-      db   (mg/get-db conn "clojure")]
+;;(let [conn (mg/connect)
+;;      db   (mg/get-db conn "clojure")]
   ;; with a generated document id, returns the complete
   ;; inserted document
   ;;(mc/insert-and-return db "messages" {:header "John" :body "Тестовое сообщение!" :date (date-now)})
 
-  (mc/find-map-by-id db "messages" (ObjectId. "5532b09f73562985dfd0e5eb")))
+  ;;(mc/find-map-by-id db "messages" (ObjectId. "5532b09f73562985dfd0e5eb")))
 
 (def coll-messages "messages")
 
