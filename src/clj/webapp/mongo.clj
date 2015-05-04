@@ -9,8 +9,11 @@
 
 
 (def db (mg/get-db (mg/connect) "clojure"))
+(def coll-messages "messages")
 
-(def message {:header "John" :body "Тестовое сообщение!" :date (utils/dateTime-now)})
+;; (def message {:header "Astronomers Found a Gas Giant Orbiting Surprisingly Close to a Tiny Star"
+;;               :body "Astronomers watching a small red dwarf star 500 light years away were surprised to notice a brief dip in its already dim light. But they quickly identified the source of the change: the darker mass of a planet passing between the distant star and our vantage point on Earth."
+;;               :date (utils/dateTime-now)})
 ;;(.get (mc/insert-and-return db "messages" message) :_id)
 
 ;;(mc/find-map-by-id db "messages" (ObjectId. "5532b09f73562985dfd0e5eb"))
@@ -24,7 +27,7 @@
 
   ;;(mc/find-map-by-id db "messages" (ObjectId. "5532b09f73562985dfd0e5eb")))
 
-(def coll-messages "messages")
+
 
 (defn get-all-messages [] (apply list (mc/find db coll-messages)))
 (defn create-new-message [message] (mc/insert-and-return db coll-messages message))

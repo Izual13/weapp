@@ -16,7 +16,7 @@
                  ;;[ring/ring-json "0.3.1"]
 
                  ;;[cc.qbits/jet "0.5.4"]
-                 [garden "1.2.5"]
+                 ;;[garden "1.2.5"]
                  [cljs-ajax "0.3.11"]
 
                  [org.clojure/data.json "0.2.6"]
@@ -27,7 +27,9 @@
 
 
   ;; beign cljs
-  :plugins [[lein-cljsbuild "1.0.4"][lein-ring "0.9.3"]]
+  :plugins [[lein-cljsbuild "1.0.4"]
+            [lein-ring "0.9.3"]
+            [lein-garden "0.2.6"]]
   :cljsbuild {:builds
             [{:id "app"
               :source-paths ["src/cljs"]
@@ -40,7 +42,17 @@
                          :pretty-print true}}]}
   ;; end cljs
   :source-paths ["src/clj"]
-  :hooks [leiningen.cljsbuild]
-  :ring {:handler webapp.core/app
-         :resources-path "resources"}
+  :hooks [leiningen.cljsbuild leiningen.garden]
+  :ring {:handler webapp.core/app}
+  :garden {:builds [{;; Optional name of the build:
+                     :id "screen"
+                     ;; Source paths where the stylesheet source code is
+                     :source-paths ["src/clj/"]
+                     ;; The var containing your stylesheet:
+                     :stylesheet webapp.styles/screen
+                     ;; Compiler flags passed to `garden.core/css`:
+                     :compiler {;; Where to save the file:
+                                :output-to "resources/public/css/styles.css"
+                                ;; Compress the output?
+                                :pretty-print? false}}]}
   :main webapp.core)

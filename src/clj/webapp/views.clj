@@ -1,24 +1,26 @@
 (ns webapp.views
   (:require [hiccup.core :as hc]
+            [hiccup.page :as hp]
             [webapp.utils :as utils]))
 
 
+(hp/include-css "/css/main.css")
 
 
-(defn style [path]
-  [:link {:href path :rel "stylesheet" :type "text/css"}])
+;; (defn style [path]
+;;   [:link {:href path :rel "stylesheet" :type "text/css"}])
 
-(defn js [path]
-  [:script {:src path}])
+;; (defn js [path]
+;;   [:script {:src path}])
 
 (defn layout [title & body]
   (hc/html
     [:html
      [:head
       [:title title]
-      (style "/static/css/bootstrap.min.css")
-      (style "/static/css/monokai_sublime.css")
-      (style "/static/css/styles.css")]
+      (hp/include-css "/static/css/bootstrap.min.css")
+      (hp/include-css "/static/css/monokai_sublime.css")
+      (hp/include-css "/static/css/styles.css")]
      [:body
       [:div.container body]]]))
 
@@ -29,10 +31,11 @@
                         [:div.panel-body
                          [:button.btn.btn-sm.btn-default {:id "onClick"} "Click me!"]"&nbsp;"
                          [:button.btn.btn-sm.btn-default {:id "showAll"} "Show all..."]"&nbsp;"
-                         [:button.btn.btn-sm.btn-default {:id "clear"} "Clear..."]]]
-                       [:div.panel.panel-default {:id "messages"}
-                        [:div.panel-heading "Messages"]]
-                       (js "/static/js/app.js")
+                         [:button.btn.btn-sm.btn-default {:id "clear"} "Clear list"]]]
+                       [:div.panel.panel-default
+                        [:div.panel-heading "Posts"]
+                        [:ul.list-group {:id "messages"}]]
+                       (hp/include-js "/static/js/app.js")
                        ))
 
 
