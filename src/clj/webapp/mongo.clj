@@ -8,7 +8,21 @@
            [com.mongodb DB WriteConcern]))
 
 
-(def db (mg/get-db (mg/connect) "clojure"))
+(def mongo-url (get (System/getenv) "OPENSHIFT_MONGODB_DB_HOST" "127.0.0.1"))
+(def mongo-port (Integer/parseInt (get (System/getenv) "OPENSHIFT_MONGODB_DB_PORT" "27017")))
+(def mongo-user  (get (System/getenv) "OPENSHIFT_MONGODB_DB_USERNAME" ""))
+(def mongo-password (get (System/getenv) "OPENSHIFT_MONGODB_DB_PASSWORD" ""))
+(def mongo-db (get (System/getenv) "OPENSHIFT_GEAR_NAME" "clojure"))
+
+(.println (System/out) mongo-url)
+(.println (System/out) mongo-port)
+(.println (System/out) mongo-user)
+(.println (System/out) mongo-password)
+(.println (System/out) mongo-db)
+
+(def db (mg/get-db (mg/connect {:host mongo-url :port mongo-port}) mongo-db))
+(mg/authenticate db mongo-user (.toCharArray mongo-password))
+
 (def coll-messages "messages")
 
 ;; (def message {:header "Astronomers Found a Gas Giant Orbiting Surprisingly Close to a Tiny Star"

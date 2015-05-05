@@ -7,8 +7,15 @@
            [org.bson.types ObjectId]
            [com.mongodb DB WriteConcern]))
 
+(def mongo-url (get (System/getenv) "OPENSHIFT_MONGODB_DB_HOST" "127.0.0.1"))
+(def mongo-port (Integer/parseInt (get (System/getenv) "OPENSHIFT_MONGODB_DB_PORT" "27017")))
+(def mongo-user  (get (System/getenv) "OPENSHIFT_MONGODB_DB_USERNAME" ""))
+(def mongo-password (get (System/getenv) "OPENSHIFT_MONGODB_DB_PASSWORD" ""))
+(def mongo-db (get (System/getenv) "OPENSHIFT_GEAR_NAME" "clojure"))
 
-(def db (mg/get-db (mg/connect) "clojure"))
+(def db (mg/get-db (mg/connect {:host mongo-url :port mongo-port}) mongo-db))
+(mg/authenticate db mongo-user (.toCharArray mongo-password))
+
 (def coll "messages")
 (mc/remove db coll)
 
