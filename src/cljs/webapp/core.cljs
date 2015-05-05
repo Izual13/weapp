@@ -62,18 +62,6 @@
 (logger "123")
 
 
-;;(def message (GET "/messages"))
-;;(logger (GET "/messages"))
-
-;; (set! (.-innerHTML (dom/getElement "clicksnumber"))((map (GET "/messages"))))
-;;(GET "/messages" {:handler logger :error-handler (fn [x](.log js/console "error")(.log js/console x))})
-
-
-;;(defn test-message [] (dom/appendChild (dom/getElement "messages") (create-li 123 321)))
-
-;;(test-message)
-;;(logger (create-li 123 321))
-
 (defn show-message [{:keys [_id body date header]}]
   (logger _id body)
   (append (dom/getElement "messages") (create-li header body date)))
@@ -99,22 +87,12 @@
 
 (get-all-messages)
 
-
-
-;;(defn show-message [x] (logger x))
-
-
 (defn render-message [{:keys [message user]}]
  [:li [:p {:id user} message " - " user]])
 
 
-
-;;(->> (GET "/messages")
-  ;;   (map render-message))
-
-
-
   ;;(.reload (.-location js/window))
+
 (defn main
   []
   (let [counter (atom 0)

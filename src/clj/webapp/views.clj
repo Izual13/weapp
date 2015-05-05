@@ -7,12 +7,6 @@
 (hp/include-css "/css/main.css")
 
 
-;; (defn style [path]
-;;   [:link {:href path :rel "stylesheet" :type "text/css"}])
-
-;; (defn js [path]
-;;   [:script {:src path}])
-
 (defn layout [title & body]
   (hc/html
     [:html
