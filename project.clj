@@ -16,8 +16,9 @@
                  ;;[ring/ring-json "0.3.1"]
 
                  ;;[cc.qbits/jet "0.5.4"]
-                 ;;[garden "1.2.5"]
+                 [garden "1.2.5"]
                  [cljs-ajax "0.3.11"]
+                 [enfocus "2.1.1"]
 
                  [org.clojure/data.json "0.2.6"]
                  ;;mongo json

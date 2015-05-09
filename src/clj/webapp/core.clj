@@ -32,7 +32,7 @@
 ;; Defines a handler that acts as router
 (defroutes app
   (GET "/" [] home)
-  (GET "/test" [] home)
+  (GET "/cool-font" [] home)
   (GET "/static/home" [] static-home)
   (route/resources "/static")
   (context "/messages" [] (defroutes messages-routes

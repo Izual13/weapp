@@ -14,16 +14,17 @@
       [:title title]
       (hp/include-css "/static/css/bootstrap.min.css")
       (hp/include-css "/static/css/monokai_sublime.css")
-      (hp/include-css "/static/css/styles.css")]
+      (hp/include-css "/static/css/styles.css")
+      (hp/include-css "/static/css/fonts/poiret.css")]
      [:body
-      [:div.container body]]]))
+      [:div.container-fluid body]]]))
 
 
 (defn index [] (layout "Welcome!" [:h1 "Hello, World!"]
                        [:div.panel.panel-default
                         [:div.panel-heading[:span "Cliks: "][:span {:id "clicksnumber"}]]
                         [:div.panel-body
-                         [:button.btn.btn-sm.btn-default {:id "onClick"} "Click me!"]"&nbsp;"
+                         [:button.btn.btn-sm.btn-default {:id "coolFont"} "Change font!"]"&nbsp;"
                          [:button.btn.btn-sm.btn-default {:id "showAll"} "Show all..."]"&nbsp;"
                          [:button.btn.btn-sm.btn-default {:id "clear"} "Clear list"]]]
                        [:div.panel.panel-default

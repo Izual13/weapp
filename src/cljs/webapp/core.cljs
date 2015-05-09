@@ -91,15 +91,21 @@
  [:li [:p {:id user} message " - " user]])
 
 
-  ;;(.reload (.-location js/window))
+  ;;(.reload (.-location js/window)) charlotte
 
+
+
+
+(.setAttribute (aget (js/document.getElementsByTagName "html") 0)
+               "class" "")
 (defn main
   []
   (let [counter (atom 0)
-        button  (dom/getElement "onClick")
+        button  (dom/getElement "coolFont")
         display (dom/getElement "clicksnumber")
         showAll (dom/getElement "showAll")
-        clear (dom/getElement "clear")]
+        clear (dom/getElement "clear")
+        html (aget (js/document.getElementsByTagName "html") 0)]
 
     ;; Set initial value
     (set! (.-innerHTML display) @counter)
@@ -107,6 +113,9 @@
     ;; Assign event listener
     (events/listen button "click"
                    (fn [event]
+                     (if (even? @counter)
+                          (.setAttribute html "class" "test")
+                          (.setAttribute html "class" ""))
                      ;; Increment the value
                      (swap! counter inc)
                      ;; Set new value in display element
