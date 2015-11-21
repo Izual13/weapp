@@ -1,12 +1,12 @@
 (defproject webapp "0.1.0-SNAPSHOT"
   :description "FIXME: write this!"
   :url "http://exampl.com/FIXME"
-  :dependencies [[org.clojure/clojure "1.6.0"]
+  :dependencies [[org.clojure/clojure "1.7.0"]
                  ;; cljs dependency
-                 [org.clojure/clojurescript "0.0-2843"]
+                 [org.clojure/clojurescript "1.7.170"]
 
                  ;; Backend dependencies
-                 [compojure "1.3.1"]
+                 [compojure "1.4.0"]
                  [http-kit "2.1.19"]
 
                  [hiccup "1.0.5"]
